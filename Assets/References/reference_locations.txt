@@ -1,0 +1,8 @@
+
+
+https://www.khanacademy.org/computer-programming/orbits/1864670392
+https://docs.unity3d.com/ScriptReference/Vector3.Distance.html
+https://en.wikipedia.org/wiki/Orbit_modeling
+https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes
+https://en.wikipedia.org/wiki/Orbital_eccentricity
+https://en.wikipedia.org/wiki/Eccentricity_vector

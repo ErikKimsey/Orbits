@@ -11,14 +11,14 @@ public class Planet : MonoBehaviour
     public GameObject m_StarGameObj;
     Star m_Star;
 
-    private Vector3 distFromStar;
+    private float distFromStar;
 
     private Vector3 currPos;
 
     private float semiMinorAxis;
     private float semiMajorAxis;
 
-    private float eccentricity;
+    public float eccentricity = 0.7f;
 
 
     void Start()
@@ -32,21 +32,21 @@ public class Planet : MonoBehaviour
       eccentricity = 0.7f;
     }
 
-    void CalculateDistance(){
+    private void CalculateDistance(){
            if (m_Star)
         {
-            float dist = Vector3.Distance(m_Star.GetPosition(), transform.position);
-            print("Distance to other: " + dist);
+            distFromStar = Vector3.Distance(m_Star.GetPosition(), transform.position);
         }
     }
 
-    void CreateEccentricity(){
-      // 
+    private void CalculateOrbit(){
+      CalculateDistance();
+       transform.RotateAround(m_Star.GetPosition(), Vector3.up, 30 * Time.deltaTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-      CalculateDistance();
+      CalculateOrbit();
     }
 }
