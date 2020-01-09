@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 1395349367}
   - component: {fileID: 1395349366}
   - component: {fileID: 1395349365}
+  - component: {fileID: 1395349368}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -386,6 +387,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395349363}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1395349368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395349363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082d7c3d6b54b4fa6a83db97e4e97557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1428954606
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +444,9 @@ GameObject:
   - component: {fileID: 1464049783}
   - component: {fileID: 1464049782}
   - component: {fileID: 1464049781}
+  - component: {fileID: 1464049784}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Planet_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,3 +526,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464049779}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1464049784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464049779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939f3641913f74d93b891f78fb5aca90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: {fileID: 0}
+  m_StarGameObj: {fileID: 0}
+  eccentricity: 0

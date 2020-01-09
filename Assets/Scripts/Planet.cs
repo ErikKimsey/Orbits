@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     float dist;
     public MeshRenderer planet;
     private Vector3 planetPos;
@@ -39,12 +39,29 @@ public class Planet : MonoBehaviour
         }
     }
 
-    private void CalculateOrbit(){
-      CalculateDistance();
-       transform.RotateAround(m_Star.GetPosition(), Vector3.up, 30 * Time.deltaTime);
+    private void CalculateEccentricity(){
+      eccentricity = (semiMajorAxis - semiMinorAxis) / (semiMinorAxis + semiMajorAxis);
     }
 
-    // Update is called once per frame
+    private float CalculateKepler(float vectorPos){
+      return semiMajorAxis * (1 - Mathf.Pow(eccentricity, 2) ) / (1 + eccentricity * Mathf.Cos(vectorPos));
+    }
+
+    private void CalculateCurrentPos(){
+      currPos = transform.position;
+      float x = CalculateKepler(currPos.x);
+      float z = CalculateKepler(currPos.z);
+      float y = CalculateKepler(currPos.x);
+      // transform.position = 
+    }
+
+    
+    private void CalculateOrbit(){
+      CalculateDistance();
+       transform.RotateAround(m_Star.GetPosition(), Vector3.down, 60 * Time.deltaTime);
+       Debug.Log(transform.position);
+    }
+
     void Update()
     {
       CalculateOrbit();
