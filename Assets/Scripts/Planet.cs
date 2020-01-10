@@ -43,16 +43,23 @@ public class Planet : MonoBehaviour
       eccentricity = (semiMajorAxis - semiMinorAxis) / (semiMinorAxis + semiMajorAxis);
     }
 
-    private float CalculateKepler(float vectorPos){
-      return semiMajorAxis * (1 - Mathf.Pow(eccentricity, 2) ) / (1 + eccentricity * Mathf.Cos(vectorPos));
+    // private float CalculateKepler(float axis){
+    //   return axis * Mathf.Cos(axis - transform.position.x * Time.deltaTime);
+    // }
+    private float CalculateX(float axis){
+      return axis * Mathf.Cos(axis - transform.position.x) * Time.deltaTime;
     }
+
+    /**
+      x = major * cos(major - transform.position.x * deltaTime)
+      z = minor * sin(minor transform.position.z * deltaTime)
+      y = minor * sin(minor transform.position.y * deltaTime)
+    */
 
     private void CalculateCurrentPos(){
       currPos = transform.position;
-      float x = CalculateKepler(currPos.x);
-      float z = CalculateKepler(currPos.z);
-      float y = CalculateKepler(currPos.x);
-      // transform.position = 
+      float x = CalculateX(semiMajorAxis);
+      Debug.Log(x);
     }
 
     
@@ -64,6 +71,11 @@ public class Planet : MonoBehaviour
 
     void Update()
     {
-      CalculateOrbit();
+      // CalculateOrbit();
+      transform.position = new Vector3(1f + (9f * Mathf.Sin(Mathf.Deg2Rad * eccentricity)),
+      0f + ( 1f * Mathf.Sin(Mathf.Deg2Rad * eccentricity)),
+      0f + ( 5f * Mathf.Cos(Mathf.Deg2Rad * eccentricity)));
+      // transform.Rotate()
+    eccentricity += 5f;
     }
 }
