@@ -20,6 +20,14 @@ public class Planet : MonoBehaviour
 
     public float eccentricity = 0.7f;
 
+    public float deg = 30.0f;
+
+    public float xAlpha = 1f;
+    public float yAlpha = -1f;
+    public float zAlpha = 1f;
+
+    public float yDeg = 1;
+
 
     void Start()
     {
@@ -59,23 +67,22 @@ public class Planet : MonoBehaviour
     private void CalculateCurrentPos(){
       currPos = transform.position;
       float x = CalculateX(semiMajorAxis);
-      Debug.Log(x);
     }
 
     
     private void CalculateOrbit(){
       CalculateDistance();
        transform.RotateAround(m_Star.GetPosition(), Vector3.down, 60 * Time.deltaTime);
-       Debug.Log(transform.position);
     }
 
     void Update()
     {
       // CalculateOrbit();
-      transform.position = new Vector3(1f + (9f * Mathf.Sin(Mathf.Deg2Rad * eccentricity)),
-      0f + ( 1f * Mathf.Sin(Mathf.Deg2Rad * eccentricity)),
-      0f + ( 5f * Mathf.Cos(Mathf.Deg2Rad * eccentricity)));
-      // transform.Rotate()
-    eccentricity += 5f;
+      transform.position = new Vector3(xAlpha + (16f * Mathf.Sin(Mathf.Deg2Rad * eccentricity)),
+      yAlpha + ( -1f * Mathf.Sin(yDeg * Mathf.Deg2Rad * eccentricity)),
+      zAlpha + ( 5f * Mathf.Cos(Mathf.Deg2Rad * eccentricity)));
+      eccentricity -= 5f;
+        float rad = deg * Mathf.Deg2Rad;
+        Debug.Log(deg + " degrees are equal to " + rad + " radians.");
     }
 }
