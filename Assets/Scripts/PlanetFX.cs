@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlanetFX: MonoBehaviour {
 
   public float speed = 3f;
+  public float xRotationRate = 3f;
+  public float yRotationRate = -2f;
+  public float zRotationRate = 2f;
+
+
   private void Update() {
-    // transform.rotation = Quaternion.FromToRotation(Vector3.up, transform.forward);
-     transform.Rotate(Vector3.left, 45 * Time.deltaTime * speed);
+     transform.Rotate(new Vector3(xRotationRate, yRotationRate, zRotationRate), 45 * Time.deltaTime * speed);
   }
 }
