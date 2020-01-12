@@ -5009,6 +5009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1780e87b08b4c22b27127d282923b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  xRotationRate: 3
+  yRotationRate: -2
+  zRotationRate: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,7 +5106,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0fc547866ef2b4fbbb5107f43b73aeb7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.32
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0fc547866ef2b4fbbb5107f43b73aeb7,
         type: 3}
@@ -5112,7 +5116,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0fc547866ef2b4fbbb5107f43b73aeb7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.04
+      value: 12.8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0fc547866ef2b4fbbb5107f43b73aeb7,
         type: 3}
