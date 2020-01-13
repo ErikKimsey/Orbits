@@ -40,6 +40,8 @@ public class Planet : MonoBehaviour
       semiMajorAxis = 7.0f;
       semiMinorAxis = 2.0f;
       eccentricity = 0.7f;
+      int sum = (int)Mathf.Pow( 2, 4 );
+      Debug.Log((int)Mathf.Pow( 2,8 ) * 2);
     }
 
     private void CalculateDistance(){
@@ -69,7 +71,6 @@ public class Planet : MonoBehaviour
       1f + ( zAlpha * Mathf.Cos(Mathf.Deg2Rad * eccentricity)));
       eccentricity += eccentricityIncrement;
         float rad = deg * Mathf.Deg2Rad;
-        Debug.Log(deg + " degrees are equal to " + rad + " radians.");
     }
 
     void Update()

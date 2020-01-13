@@ -68,22 +68,81 @@ public class AudioRecorder : MonoBehaviour {
   private void Start() {
     _AudioSrc = GetComponent<AudioSource>();
     _AudioSrc.loop = true;
-    while(!(Microphone.GetPosition(null) > 0)){}
-    // _AudioSrc.Play();
+    SetMic();
+    _AudioSrc.Play();
   }
 
-  private void GetPermission(){
-
+  private void Update() {
+    MakeFrequencyBands();
+    GetSampleData();
+    BandBuffer();
   }
 
-  private void GetMic(){
-    if(Microphone.devices.ToString().Length > 0){
-      _AudioSrc.clip = Microphone.Start("Built-In Microphone", true, 30, AudioSettings.outputSampleRate);
+  // private void GetPermission(){}
+
+  private void SetMic(){
+    // if(Microphone.devices.ToString().Length > 0){
+      // while ( !( Microphone.GetPosition( Microphone.devices[0] ) > 0 ) ) { }
+      _AudioSrc.clip = Microphone.Start(Microphone.devices[0], true, 10, AudioSettings.outputSampleRate);
+    // }
+  }
+
+  private void BandBuffer(){
+    for (int i = 0; i < 8; i++){
+      if(_freqBand[i] > _bandBuffer[i]){
+        _bandBuffer[i] = _freqBand[i];
+        _bufferDecrease[i] = 0.005f;
+      }
+      if(_freqBand[i] < _bandBuffer[i]){
+        _freqBand[i] = _bandBuffer[i];
+        _bufferDecrease[i] *= 1.2f;
+      }
     }
   }
 
   private void GetSampleData(){
-    _AudioSrc.GetSpectrumData(_audioSample, 0, FFTWindow.BlackmanHarris);
+    _AudioSrc.GetSpectrumData(_audioSample, 0, FFTWindow.Blackman);
+  }
+
+  void MakeFrequencyBands() {
+    /*
+      *  22050 / 512 - 43hz per sample
+      *  
+      *  20 - 60hz
+      *  60 - 250hz
+      *  250 - 500hz
+      *  2000 - 4000hz
+      *  4000 - 6000hz
+      *  6000 - 20000hz
+      *  
+      *  0 - 2 = 86hz
+      *  1 - 4 = 172hz - 87-258
+      *  2 - 8 = 344hz - 259-602
+      *  3 - 16 = 688hz - 603-1290
+      *  4 - 32 = 1376hz - 1291-2666
+      *  5 - 64 = 2752hz - 2667-5418
+      *  6 - 128 = 5504hz - 5419-10922
+      *  7 - 256 = 11008hz - 10923-21930
+      *  510
+      */
+    int count = 0;
+    for(int i=0; i < 8; i++){
+      float average = 0f;
+      int sampleCount = (int)Mathf.Pow(2,i) * 2;
+
+      if(i == 7){
+        sampleCount += 2;
+      }
+
+      for(int j=0; j < sampleCount; j++){
+        average += _audioSample[count] * count + 1;
+        Debug.Log(average);
+        count++;
+      }
+
+      average /= count;
+      _freqBand[i] = average * 10;
+    }
   }
 
   /**

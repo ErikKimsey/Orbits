@@ -9,7 +9,6 @@ public class PlanetTilt: MonoBehaviour {
   private GameObject planet;
   private void TiltPlanet(){
     planet = GetComponent<GameObject>();
-    Debug.Log(transform.rotation);
     // transform.rotation = TiltQuat(Input.gyro.attitude);
   }
 

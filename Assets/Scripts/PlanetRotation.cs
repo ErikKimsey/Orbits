@@ -15,9 +15,7 @@ public class PlanetRotation: MonoBehaviour {
 
   private void Start() {
     planet = GetComponent<Planet>();
-    
     device = planet.GetComponent<DetectDeviceType>();
-    Debug.Log(device.GetDeviceType());
   }
 
 
