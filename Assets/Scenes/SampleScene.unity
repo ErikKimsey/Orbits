@@ -4988,13 +4988,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 514902228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a1780e87b08b4c22b27127d282923b0, type: 3}
+  m_Script: {fileID: 11500000, guid: af7ed33977e404044b2e05f52608d8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  xRotationRate: 3
-  yRotationRate: -2
-  zRotationRate: 2
 --- !u!114 &514902230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5007,8 +5003,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939f3641913f74d93b891f78fb5aca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: {fileID: 0}
-  m_StarGameObj: {fileID: 0}
+  planet: {fileID: 514902233}
+  m_StarGameObj: {fileID: 1395349363}
   eccentricity: 0.7
   eccentricityIncrement: 1
   deg: 30
@@ -5025,9 +5021,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 514902228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6089e98269382418683a979efbd3cf77, type: 3}
+  m_Script: {fileID: 11500000, guid: b879ad88608d84fbbb330b177cffe439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  xRotationRate: 3
+  yRotationRate: -2
+  zRotationRate: 2
+--- !u!114 &514902232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514902228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f0373dcb03548b48bdf87f4b3ecd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!23 &514902233 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 0fc547866ef2b4fbbb5107f43b73aeb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 514902226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &582116905
 GameObject:
   m_ObjectHideFlags: 0
@@ -14870,7 +14888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1395349364
 Transform:
   m_ObjectHideFlags: 0

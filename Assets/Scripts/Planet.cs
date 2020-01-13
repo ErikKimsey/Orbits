@@ -74,6 +74,6 @@ public class Planet : MonoBehaviour
 
     void Update()
     {
-      // CalculateOrbit();
+      
     }
 }

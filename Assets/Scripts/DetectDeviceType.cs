@@ -5,11 +5,9 @@ using UnityEngine;
 public class DetectDeviceType : MonoBehaviour
 {
     //This is the Text for the Label at the top of the screen
-    string m_DeviceType;
+    private static string m_DeviceType;
 
     private void Start() {
-
-        Debug.Log("Device type : " + m_DeviceType);
 
         //Check if the device running this is a console
         if (SystemInfo.deviceType == DeviceType.Console)
@@ -35,5 +33,9 @@ public class DetectDeviceType : MonoBehaviour
         {
             m_DeviceType = "Unknown";
         }
+    }
+
+    public string GetDeviceType(){
+      return m_DeviceType;
     }
 }
