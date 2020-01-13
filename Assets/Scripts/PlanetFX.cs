@@ -10,7 +10,21 @@ public class PlanetFX: MonoBehaviour {
   public float zRotationRate = 2f;
 
 
-  private void Update() {
+  private void RotatePlanet(){
      transform.Rotate(new Vector3(xRotationRate, yRotationRate, zRotationRate), 45 * Time.deltaTime * speed);
+  }
+
+  private void TiltPlanet(){
+    transform.rotation = TiltQuat(Input.gyro.attitude);
+  }
+
+  private static Quaternion TiltQuat(Quaternion q)
+    {
+        return new Quaternion(q.x, q.y, -q.z, -q.w);
+    }
+
+
+  private void Update() {
+    // RotatePlanet();
   }
 }
