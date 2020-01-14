@@ -24,13 +24,13 @@ public class AudioRecorder : MonoBehaviour {
   //  - - 
   //  - float[512] for: samplesLeft, samplesRight
 
-  private float[] _audioSample = new float[512];
+  public float[] _audioSamples = new float[512];
   private float[] _sampleLeft = new float[512];
   private float[] _sampleRight = new float[512];
 
   //  - - 
   //  - float[8] for: freqBand, bandBuffer, bufferDecrease, freqBandPeak,
-  float[] _freqBand = new float[8];
+  public float[] _freqBand = new float[8];
   float[] _bandBuffer = new float[8];
   float[] _bufferDecrease = new float[8];
   float[] _freqBandPeak = new float[8];
@@ -67,14 +67,14 @@ public class AudioRecorder : MonoBehaviour {
 
   private void Start() {
     _AudioSrc = GetComponent<AudioSource>();
-    _AudioSrc.loop = true;
-    SetMic();
-    _AudioSrc.Play();
+    // _AudioSrc.loop = true;
+    // SetMic();
+    // _AudioSrc.Play();
   }
 
   private void Update() {
-    MakeFrequencyBands();
     GetSampleData();
+    MakeFrequencyBands();
     BandBuffer();
   }
 
@@ -83,7 +83,7 @@ public class AudioRecorder : MonoBehaviour {
   private void SetMic(){
     // if(Microphone.devices.ToString().Length > 0){
       // while ( !( Microphone.GetPosition( Microphone.devices[0] ) > 0 ) ) { }
-      _AudioSrc.clip = Microphone.Start(Microphone.devices[0], true, 10, AudioSettings.outputSampleRate);
+      // _AudioSrc.clip = Microphone.Start(Microphone.devices[0], true, 10, AudioSettings.outputSampleRate);
     // }
   }
 
@@ -101,7 +101,7 @@ public class AudioRecorder : MonoBehaviour {
   }
 
   private void GetSampleData(){
-    _AudioSrc.GetSpectrumData(_audioSample, 0, FFTWindow.Blackman);
+    _AudioSrc.GetSpectrumData(_audioSamples, 0, FFTWindow.Blackman);
   }
 
   void MakeFrequencyBands() {
@@ -135,13 +135,13 @@ public class AudioRecorder : MonoBehaviour {
       }
 
       for(int j=0; j < sampleCount; j++){
-        average += _audioSample[count] * count + 1;
-        Debug.Log(average);
+        average += _audioSamples[count] * count + 1;
         count++;
       }
 
       average /= count;
       _freqBand[i] = average * 10;
+      Debug.Log(_freqBand[i]);
     }
   }
 
