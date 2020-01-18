@@ -12,13 +12,12 @@ public class DiamondResponse : MonoBehaviour
     void Start()
     {
       audio = GetComponent<AudioRecorder>();
-      Debug.Log(audio);
       planet = GameObject.Find("diamond").GetComponent<Planet>();
     }
 
     // Update is called once per frame
     void Update()
     {     
-      planet.transform.localScale = new Vector3(audio._freqBand[5] * 10,audio._freqBand[3] * 10 ,audio._freqBand[7] * 10);
+      // planet.transform.localScale = new Vector3(audio._freqBand[5] * 10,audio._freqBand[3] * 10 ,audio._freqBand[7] * 10);
     }
 }

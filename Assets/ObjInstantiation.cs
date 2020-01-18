@@ -30,6 +30,8 @@ public class ObjInstantiation : MonoBehaviour
     {
       for (int i = 0; i < 512; i++){
         if(_sampleObject != null){
+          Debug.Log("AudioRecorder._audioSamples["+i+"]");
+          Debug.Log(AudioRecorder._audioSamples[i]);
           _sampleObject[i].transform.localScale = new Vector3(10,(AudioRecorder._audioSamples[i] * _maxScale) + 10, 10);
         }
       } 

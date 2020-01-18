@@ -24,7 +24,7 @@ public class AudioRecorder : MonoBehaviour {
 
   //  - - 
   //  - float[8] for: freqBand, bandBuffer, bufferDecrease, freqBandPeak,
-  public float[] _freqBand = new float[8];
+  public static float[] _freqBand = new float[8];
   float[] _bandBuffer = new float[8];
   float[] _bufferDecrease = new float[8];
   float[] _freqBandPeak = new float[8];
@@ -74,13 +74,13 @@ public class AudioRecorder : MonoBehaviour {
   }
 
   public void PlayClip(){
-    _AudioSrc.Play();
+    // _AudioSrc.Play();
   }
 
   public void Update() {
     GetSampleData();
     MakeFrequencyBands();
-    BandBuffer();
+    // BandBuffer();
   }
 
   // public void GetPermission(){}
@@ -106,7 +106,7 @@ public class AudioRecorder : MonoBehaviour {
   }
 
   public void GetSampleData(){
-    _AudioSrc.GetSpectrumData(_audioSamples, 0, FFTWindow.BlackmanHarris);
+    _AudioSrc.GetSpectrumData(_audioSamples, 0, FFTWindow.Blackman);
   }
 
   void MakeFrequencyBands() {
@@ -130,12 +130,15 @@ public class AudioRecorder : MonoBehaviour {
       *  7 - 256 = 11008hz - 10923-21930
       *  510
       */
+
+
+    
     int count = 0;
     for(int i=0; i < 8; i++){
       float average = 0f;
       int sampleCount = (int)Mathf.Pow(2,i) * 2;
-
-      if(i == 7){
+      
+      if(i == 0){
         sampleCount += 2;
       }
 
@@ -146,18 +149,8 @@ public class AudioRecorder : MonoBehaviour {
 
       average /= count;
       _freqBand[i] = average * 10;
-      // Debug.Log(_freqBand[i]);
+        Debug.Log("_freqBand[0]");
+        Debug.Log(_freqBand[7]);
     }
   }
-
-  /**
-    - get permissions,
-    - get microphone source,
-    - if no permission, set default audio clip
-    - if yes permission, begin recording,
-    - set recording as audio clip,
-    - make audio clip accessible 
-  */
-
-
 }
