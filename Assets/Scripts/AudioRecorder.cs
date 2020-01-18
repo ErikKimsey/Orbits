@@ -6,27 +6,21 @@ using UnityEngine.Audio;
 [RequireComponent (typeof(AudioSource))]
 public class AudioRecorder : MonoBehaviour {
   
-  //  - Microphone,
-  AudioSource _AudioSrc;
-
-  
-  //  NEEDS:
-  public AudioClip _audioClip;
   public bool _useMic;
-  private bool _hasPermission;
+  public bool _hasPermission;
 
 
   //  - - 
   //  - float[] for: audioBandBuffer, audioBand,
-  private float[] _audioBand = new float[8];
-  private float[] _audioBandBuffer = new float[8];
+  public float[] _audioBand = new float[8];
+  public float[] _audioBandBuffer = new float[8];
 
   //  - - 
   //  - float[512] for: samplesLeft, samplesRight
 
-  public float[] _audioSamples = new float[512];
-  private float[] _sampleLeft = new float[512];
-  private float[] _sampleRight = new float[512];
+  public static float[] _audioSamples = new float[512];
+  public float[] _sampleLeft = new float[512];
+  public float[] _sampleRight = new float[512];
 
   //  - - 
   //  - float[8] for: freqBand, bandBuffer, bufferDecrease, freqBandPeak,
@@ -37,57 +31,68 @@ public class AudioRecorder : MonoBehaviour {
 
   //  - -
   //  - bool if mic is detected (Microphone.devices.length > 0),
-  private bool _micDetected;
+  public bool _micDetected;
 
   //  - -
   //  - public float _Amplitude, _AmplitudeBuffer,
   //  - public float _AmplitudePeak,
   //  - public float _audioProfile
-  private float _Amplitude, _AmplitudeBuffer;
-  private float _AmplitudePeak;
-  private float _audioProfile;
+  public float _Amplitude, _AmplitudeBuffer;
+  public float _AmplitudePeak;
+  public float _audioProfile;
 
   // - - 
   //  - public enum _channel {Stereo, Left, Right}
   //  - public _channel channel = new _channel();
-  private enum _Channel {Stereo, Left, Right};
-  private _Channel channel = new _Channel();
+  public enum _Channel {Stereo, Left, Right};
+  public _Channel channel = new _Channel();
 
   //  - -
   // Audio64:
   //  - freqBand64, bandBuffer64, bufferDecrease64, freqBandPeak64, audioBandBuffer64, audioBand64
-  private float[] _freqBand64 = new float[64];
-  private float[] _bandBuffer64 = new float[64];
-  private float[] _bufferDecrease64 = new float[64];
-  private float[] _freqBandPeak64 = new float[64];
-  private float[] _audioBand64 = new float[64];
-  private float[] _audioBandBuffer64 = new float[64];
+  public float[] _freqBand64 = new float[64];
+  public float[] _bandBuffer64 = new float[64];
+  public float[] _bufferDecrease64 = new float[64];
+  public float[] _freqBandPeak64 = new float[64];
+  public float[] _audioBand64 = new float[64];
+  public float[] _audioBandBuffer64 = new float[64];
+
+  // ------------------- >>
+  // ------------------- >>
+  // ------------------- >>
+  public AudioSource _AudioSrc;
+
+  public AudioClip _audioClip;
+  // ------------------- << 
+  // ------------------- << 
+  // ------------------- <<
 
 
-
-  private void Start() {
+  public void Start() {
     _AudioSrc = GetComponent<AudioSource>();
-    // _AudioSrc.loop = true;
-    // SetMic();
-    // _AudioSrc.Play();
+    _AudioSrc.loop = true;
   }
 
-  private void Update() {
+  public void PlayClip(){
+    _AudioSrc.Play();
+  }
+
+  public void Update() {
     GetSampleData();
     MakeFrequencyBands();
     BandBuffer();
   }
 
-  // private void GetPermission(){}
+  // public void GetPermission(){}
 
-  private void SetMic(){
+  public void SetMic(){
     // if(Microphone.devices.ToString().Length > 0){
       // while ( !( Microphone.GetPosition( Microphone.devices[0] ) > 0 ) ) { }
       // _AudioSrc.clip = Microphone.Start(Microphone.devices[0], true, 10, AudioSettings.outputSampleRate);
     // }
   }
 
-  private void BandBuffer(){
+  public void BandBuffer(){
     for (int i = 0; i < 8; i++){
       if(_freqBand[i] > _bandBuffer[i]){
         _bandBuffer[i] = _freqBand[i];
@@ -100,8 +105,8 @@ public class AudioRecorder : MonoBehaviour {
     }
   }
 
-  private void GetSampleData(){
-    _AudioSrc.GetSpectrumData(_audioSamples, 0, FFTWindow.Blackman);
+  public void GetSampleData(){
+    _AudioSrc.GetSpectrumData(_audioSamples, 0, FFTWindow.BlackmanHarris);
   }
 
   void MakeFrequencyBands() {
@@ -141,7 +146,7 @@ public class AudioRecorder : MonoBehaviour {
 
       average /= count;
       _freqBand[i] = average * 10;
-      Debug.Log(_freqBand[i]);
+      // Debug.Log(_freqBand[i]);
     }
   }
 
